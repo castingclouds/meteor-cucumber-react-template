@@ -1,6 +1,3 @@
-# Shepherd
+# Meteor Cucumber React Template
 
-A Bot Centric Client for Managing All The Things!
-
-- [x] Enable Travis CI [![Build Status](https://travis-ci.org/castingclouds/shepherd.svg?branch=master)](https://travis-ci.org/castingclouds/shepherd)
-- [x] Enable Code Climate [![Code Climate](https://codeclimate.com/github/castingclouds/shepherd/badges/gpa.svg)](https://codeclimate.com/github/castingclouds/shepherd)
+This is a simple starter project for Meteor to help with Open Source projects to include TravisCI and CodeClimate by default with a sample `.travis.yml` to help for configuring your Meteor project with Velocity testing on the new TravisCI infrastructure.
