@@ -1,0 +1,42 @@
+language: node_js
+sudo: false
+node_js:
+  - "0.12"
+env:
+  global:
+    - BROWSER=chrome
+    - SELENIUM_BROWSER=chrome
+    - CUCUMBER_SCREENSHOTS_DIR=$HOME/results/screenshots
+    - CUCUMBER_JSON_OUTPUT=$HOME/results/results.cucumber
+    - CUCUMBER_TAGS=~@ignore
+    - VELOCITY_CI=1
+    # - VELOCITY_DEBUG=1
+addons:
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
+  artifacts:
+    s3_region: "us-east-1"
+    paths:
+    - .meteor/local/log
+    - $HOME/results
+services:
+  - mongodb
+cache:
+  directories:
+    - $HOME/.meteor
+    - $HOME/.npm
+    - $HOME/test-packages
+    - .meteor/local
+before_install:
+  - PATH=$PATH:$HOME/.meteor
+  - if [ ! -e $HOME/.meteor/meteor ]; then curl https://install.meteor.com | sh; fi
+  - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1027x768x16"
+  - sleep 3 # give xvfb some time to start
+  - "export DISPLAY=:99.0"
+  - npm install -g velocity-cli
+  - mkdir -p $HOME/results/screenshots
+script:
+  - velocity test-app --ci --raw-logs

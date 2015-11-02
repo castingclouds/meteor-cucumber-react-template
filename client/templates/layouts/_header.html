@@ -1,0 +1,44 @@
+<template name="_header">
+
+  <nav class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="container">
+
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{{pathFor 'home'}}">Shepherd</a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="main-nav">
+        {{#if currentUser}}
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <span class="octicon octicon-hubot"></span> {{ currentUser.profile.name }} <span class="octicon octicon-chevron-down"></span>
+              </a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#" data-action="logout"><span class="octicon octicon-log-out"></span> Sign Out</a></li>
+              </ul>
+            </li>
+          </ul>
+        {{else}}
+          <div class="navbar-right">
+            <a href="{{ pathFor 'atSignIn' }}" class="btn btn-default navbar-btn">Sign in</a>
+            <a href="{{ pathFor 'atSignUp' }}" class="btn btn-primary navbar-btn">Register</a>
+          </div>
+        {{/if}}
+
+        <ul class="nav navbar-nav navbar-right">
+          <li class="{{ isActiveRoute regex='home' }}"><a href="{{ pathFor 'home' }}"><span class="octicon octicon-home"></span> Home</a></li>
+          <li class="{{ isActiveRoute regex='dashboard' }}"><a href="{{ pathFor 'dashboard' }}"><span class="octicon octicon-gear"></span> Dashboard</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </nav>
+
+</template>
